@@ -1,0 +1,83 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+  <script src="app.js"></script>
+  <style>
+    body{
+      background-color: whitesmoke;
+    }
+    table{
+      width: 100%;
+    }
+    #title{
+      text-align: center;
+      font-family:Arial;
+      margin-bottom: -5px;
+    }
+    #selectFile{
+      font-size: 20px;
+      font-family: Arial;
+    }
+    .container{
+      padding-left: 15px;
+    }
+    .heading{
+      font-family: Arial;
+      font-size: 23px;
+    }
+    .section{
+      font-family: Arial;
+      font-size: 18px;
+      padding-left: 15px;
+    }
+    .breakdown{
+      position: absolute;
+      left: 35%;
+      top: 8%;
+      width: 50%;
+    }
+    #Total{
+      color: darkslategrey;
+    }
+    #Average{
+      color: sienna;
+    }
+  </style>
+</head>
+<body ng-app="myapp">
+  <h1 id = "title">WhatsApp Chatlog Analysis for Android</h1>
+  <hr>
+<div ng-controller = "MainCtrl" class = "container">
+  <h3 class = 'heading'>Select file containing chatlog</h3>
+    <input type= "file" on-read-file="showContent($fileContent)" />
+    <h3 class = "heading" ng-style = "{'color' : 'darkslategrey'}">Total...</h3>
+    <div class = "section" id = "Total">
+      <p>Number of messages: {{num}}</p>
+      <p>Number of senders: {{senders}}</p>
+      <p>Days you have been chatting: {{days}}</p>
+    </div>
+    <h3 class = "heading" ng-style = "{'color' : 'sienna'}">Average...</h3>
+    <div class = "section" id = "Average">
+      <p>Words per message: {{wordAvg}}</p>
+      <p>Messages per day: {{msgAvg}}</p>
+    </div>
+    <h3 class = "heading">Most active day:</h3>
+    <p class = "section">{{activeDay}}<p>
+    <div class = "section, breakdown">
+    <h3 class = "heading" ng-style = "{'color' : 'Navy'}">Messages Per Person</h3>
+    <table>
+      <tr ng-repeat = "sdr in sdrData">
+        <td ng-style = "{'background-color' : 'transparent', 'width' : '20%', 'text-align' : 'right'}">
+          {{sdr[0]}}
+        </td>
+        <td>
+          <div ng-style = "{'background-color' : 'Navy', 'color' : 'white', 'width' : cols[$index] + '%', 'padding-left' : '5px'}">
+            {{sdr[1]}}
+          </div>
+        </td>
+      </tr>
+    </table>
+    </div>
+</div>
+</body>
+</html>
